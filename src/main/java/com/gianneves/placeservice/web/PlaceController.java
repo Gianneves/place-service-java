@@ -1,5 +1,7 @@
 package com.gianneves.placeservice.web;
 
+import com.gianneves.placeservice.api.PlaceRequest;
+import com.gianneves.placeservice.api.PlaceResponse;
 import com.gianneves.placeservice.domain.Place;
 import com.gianneves.placeservice.domain.PlaceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +20,8 @@ public class PlaceController {
     private PlaceService placeService;
 
     @PostMapping
-    public ResponseEntity<Mono<Place>> create(@RequestBody Place place) {
-        var createPlace = placeService.create(place);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createPlace);
+    public ResponseEntity<Mono<PlaceResponse>> create(@RequestBody PlaceRequest request) {
+        var placeResponse = placeService.create(request).map(PlaceMapper::fromPlaceToResponse);
+        return ResponseEntity.status(HttpStatus.CREATED).body(placeResponse);
     }
 }
