@@ -19,4 +19,8 @@ public class PlaceService {
         var place = new Place(null, placeRequest.name(), slg.slugify(placeRequest.name()), placeRequest.state(), null, null);
         return placeRepository.save(place);
     }
+
+    public Mono<Place> getById(Long id) {
+        return placeRepository.findById(id);
+    }
 }

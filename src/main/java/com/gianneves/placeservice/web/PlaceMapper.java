@@ -8,4 +8,8 @@ public class PlaceMapper {
         return new PlaceResponse(place.name(), place.slug(),
                 place.state(), place.createdAt(), place.updatedAt());
     }
+
+    public static PlaceResponse toResponse(Place place) {
+        return new PlaceResponse(place.name(), place.slug(), place.state(), place.createdAt(), place.updatedAt());
+    }
 }
